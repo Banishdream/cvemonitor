@@ -1,0 +1,10 @@
+githubToken: github_pat_112233
+dingding:
+  enable: 0
+  webhook: xxxxxxx
+  secretKey: xxxxxxx
+  appName: dingding
+feishu:
+  enable: 0
+  webhook: xxx
+  appName: feishu
