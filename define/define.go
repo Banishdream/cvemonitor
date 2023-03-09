@@ -13,6 +13,7 @@ const (
 	HttpTimeout      = 15               // http request 超时时间
 	HttpRetry        = 3                // http request 重试时间
 	HttpMethodGET    = "GET"            // Http request 的GET方法
+	HttpMethodPOST   = "POST"           // Http request 的POST方法
 	RequestSleepTime = time.Second * 5  // http request 间隔时间
 	FuncExecInterval = time.Second * 60 // 函数执行间隔时间
 )

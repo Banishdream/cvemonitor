@@ -1,9 +1,14 @@
 package tool
 
 func SendMsg(msg string) {
-	appcfg := GetAppConfig()
-	if appcfg.DingDing.Enable {
+	appCfg := GetAppConfig()
+	if appCfg.DingDing.Enable {
 		msg = "Github监控:\n" + msg
 		DingDingNotice(msg)
+	}
+
+	if appCfg.EnterpriseWeChat.Enable {
+		msg = "\"Github监控:\n" + msg + "\""
+		EnterpriseWeChat(msg)
 	}
 }

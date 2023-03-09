@@ -10,10 +10,10 @@ import (
 AppConfig 配置
 */
 type AppConfig struct {
-	GithubToken string         `json:"githubToken"`
-	DingDing    Ding           `json:"dingDing"`
-	FeiShu      Fei            `json:"feiShu"`
-	Database    DatabaseConfig `json:"database"`
+	GithubToken      string         `json:"githubToken"`
+	DingDing         Ding           `json:"dingDing"`
+	EnterpriseWeChat WeChat         `json:"enterpriseWeChat"`
+	Database         DatabaseConfig `json:"database"`
 }
 
 type Ding struct {
@@ -23,9 +23,11 @@ type Ding struct {
 	Mobiles   []string `json:"mobiles"`
 }
 
-type Fei struct {
-	Enable  string `json:"enable"`
-	Webhook string `json:"webhook"`
+type WeChat struct {
+	Enable         bool     `json:"enable"`
+	Webhook        string   `json:"webhook"`
+	MentionUsers   []string `json:"mentionUsers"`
+	MentionMobiles []string `json:"mentionMobiles"`
 }
 
 type DatabaseConfig struct {

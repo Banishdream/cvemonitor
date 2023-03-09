@@ -1,7 +1,7 @@
 {
   "githubToken": "xx",
   "dingDing": {
-    "enable": true,
+    "enable": false,
     "webhook": "xx",
     "secretKey": "xx",
     "mobiles": [
@@ -9,9 +9,15 @@
       "xx"
     ]
   },
-  "feiShu": {
-    "enable": 0,
-    "webhook": ""
+  "enterpriseWeChat": {
+    "enable": false,
+    "webhook": "xx",
+    "mentionUsers": [
+      "xx"
+    ],
+    "mentionMobiles": [
+      "xx"
+    ]
   },
   "database": {
     "driver": "mysql",
