@@ -1,5 +1,6 @@
 package params
 
+// KeywordParams 关键字的结构体
 type KeywordParams struct {
 	Items []ItemConf `json:"items"`
 }

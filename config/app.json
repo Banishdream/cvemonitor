@@ -1,9 +1,13 @@
 {
-  "githubToken": "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 ",
+  "githubToken": "xx",
   "dingDing": {
-    "enable": 0,
-    "webhook": "",
-    "secret_key": ""
+    "enable": true,
+    "webhook": "xx",
+    "secretKey": "xx",
+    "mobiles": [
+      "xx",
+      "xx"
+    ]
   },
   "feiShu": {
     "enable": 0,
@@ -12,7 +16,7 @@
   "database": {
     "driver": "mysql",
     "username": "root",
-    "password": "jiaxunfeihong",
+    "password": "xx",
     "host": "localhost",
     "port": "13306",
     "dbname": "cvemonitor",

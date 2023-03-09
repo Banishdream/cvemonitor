@@ -1,5 +1,6 @@
 package params
 
+// CveRepoParams CVE仓库的结构体
 type CveRepoParams struct {
 	TotalCount        int        `json:"total_count"`
 	IncompleteResults bool       `json:"incomplete_results"`

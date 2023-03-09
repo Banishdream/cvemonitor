@@ -14,6 +14,7 @@ func main() {
 
 	fmt.Println("解析配置参数...")
 	appConf := tool.ParseAppConfig(define.FilePath + "/" + define.AppFileName)
+	fmt.Println(appConf)
 
 	fmt.Println("获取本地红队工具链文件")
 	toolConf := tool.ParseToolConf(define.FilePath + "/" + define.ToolFileName)
@@ -33,7 +34,6 @@ func main() {
 		3.关键字监控
 		4.红队工具监控
 	*/
-
 	var wg sync.WaitGroup
 
 	// 1.用户仓库的监控

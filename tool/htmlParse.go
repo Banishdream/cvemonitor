@@ -10,8 +10,9 @@ import (
 )
 
 /*
-HtmlParse 解析 html 判断title中是否包含关键字 CVE -ERROR: Couldn't find
-url: 要获取的 url地址
+IsExistCVE
+@describe 解析 html 判断title中是否包含关键字 CVE -ERROR: Couldn't find
+@param url string "要获取的url地址"
 */
 func IsExistCVE(url string) bool {
 	client := &http.Client{

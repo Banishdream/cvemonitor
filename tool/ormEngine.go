@@ -12,6 +12,10 @@ type Orm struct {
 
 var DbEngine = &Orm{}
 
+/*
+OrmEngine
+@describe 数据库初始化操作
+*/
 func OrmEngine(cfg *AppConfig) error {
 	db := cfg.Database
 	// caocong:cc1764..@tcp(localhost:13306)/cvemonitor?charset=utf8mb4

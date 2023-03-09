@@ -15,9 +15,6 @@ type cveDao struct {
 var CVEDao = &cveDao{tool.DbEngine}
 
 func (cveD *cveDao) InsertData(data interface{}) int64 {
-	//defer func() {
-	//	recover() // 此处进行恢复
-	//}()
 	switch v := data.(type) {
 	case models.CveMonitor:
 		n, err := cveD.Insert(&v)

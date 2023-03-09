@@ -17,9 +17,10 @@ type AppConfig struct {
 }
 
 type Ding struct {
-	Enable    string `json:"enable"`
-	Webhook   string `json:"webhook"`
-	SecretKey string `json:"secret_key"`
+	Enable    bool     `json:"enable"`
+	Webhook   string   `json:"webhook"`
+	SecretKey string   `json:"secretKey"`
+	Mobiles   []string `json:"mobiles"`
 }
 
 type Fei struct {
