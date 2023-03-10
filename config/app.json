@@ -1,0 +1,32 @@
+{
+  "githubToken": "xx",
+  "dingDing": {
+    "enable": false,
+    "webhook": "xx",
+    "secretKey": "xx",
+    "mobiles": [
+      "xx",
+      "xx"
+    ]
+  },
+  "enterpriseWeChat": {
+    "enable": false,
+    "webhook": "xx",
+    "mentionUsers": [
+      "xx"
+    ],
+    "mentionMobiles": [
+      "xx"
+    ]
+  },
+  "database": {
+    "driver": "mysql",
+    "username": "root",
+    "password": "xx",
+    "host": "localhost",
+    "port": "13306",
+    "dbname": "cvemonitor",
+    "charset": "utf8mb4",
+    "show_sql": true
+  }
+}
