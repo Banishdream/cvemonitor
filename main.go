@@ -39,6 +39,7 @@ func main() {
 	// 1.用户仓库的监控
 	wg.Add(1)
 	go func() {
+		time.Sleep(define.RequestSleepTime * 1)
 		for {
 			services.UserRepoMonitor(toolConf.UserList)
 			time.Sleep(define.FuncExecInterval)
@@ -49,6 +50,7 @@ func main() {
 	// 2.CVE页面的监控
 	wg.Add(2)
 	go func() {
+		time.Sleep(define.RequestSleepTime * 2)
 		for {
 			services.CveMonitor()
 			time.Sleep(define.FuncExecInterval)
@@ -59,6 +61,7 @@ func main() {
 	// 3.关键字监控
 	wg.Add(3)
 	go func() {
+		time.Sleep(define.RequestSleepTime * 3)
 		for {
 			services.KeywordMonitor()
 			time.Sleep(define.FuncExecInterval)
@@ -69,6 +72,7 @@ func main() {
 	// 4.红队工具监控
 	wg.Add(4)
 	go func() {
+		time.Sleep(define.RequestSleepTime * 4)
 		for {
 			services.ToolMonitor()
 			time.Sleep(define.FuncExecInterval)

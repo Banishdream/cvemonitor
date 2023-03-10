@@ -56,5 +56,5 @@ func EnterpriseWeChat(msg string) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(string(body))
+	fmt.Printf("enterpriseWeChat 发送消息成功. %v\n", string(body))
 }

@@ -53,5 +53,5 @@ func DingDingNotice(msg string) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(string(body))
+	fmt.Printf("DingTalk 发送消息成功. %v\n", string(body))
 }

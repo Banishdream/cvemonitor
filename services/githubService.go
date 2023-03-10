@@ -109,7 +109,7 @@ func CveMonitor() {
 			}
 			n := dao.CVEDao.InsertData(cm)
 			if n == 0 {
-				fmt.Printf("插入 %s 数据失败: \n", item.Name)
+				//fmt.Printf("未更新 %s 数据\n", item.Name)
 				continue
 			}
 			msg := fmt.Sprintf("有新的数据更新: %s\nURL:%s", item.Name, item.HtmlUrl)
@@ -165,7 +165,7 @@ func KeywordMonitor() {
 				}
 				n := dao.CVEDao.InsertData(cm)
 				if n == 0 {
-					fmt.Printf("插入 %s 数据失败: \n", item.Name)
+					//fmt.Printf("未更新 %s 数据\n", item.Name)
 					continue
 				}
 				msg := fmt.Sprintf("有新的数据更新: %s\nURL:%s", item.Name, item.HtmlUrl)
@@ -226,7 +226,7 @@ func ToolMonitor() {
 			n = dao.CVEDao.UpdateData(tp, id)
 		}
 		if n == 0 {
-			fmt.Printf("未更新 %s 数据\n", tp.TagName)
+			//fmt.Printf("未更新 %s 数据\n", tp.TagName)
 			continue
 		} else {
 			msg := fmt.Sprintf("有新的数据更新: %s\nURL:%s", tp.TagName, toolUrl)
