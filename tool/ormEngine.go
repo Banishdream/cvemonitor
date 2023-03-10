@@ -1,9 +1,11 @@
 package tool
 
 import (
+	"cve-monitor/define"
 	"cve-monitor/models"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
+	"time"
 )
 
 type Orm struct {
@@ -37,6 +39,7 @@ func OrmEngine(cfg *AppConfig) error {
 		return err
 	}
 
+	engine.SetConnMaxLifetime(define.MysqlWaitTimeout * time.Second)
 	DbEngine.Engine = engine
 	return nil
 }
