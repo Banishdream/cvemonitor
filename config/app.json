@@ -1,15 +1,16 @@
 {
   "githubToken": "xx",
   "dingDing": {
-    "enable": false,
+    "enable": true,
     "webhook": "xx",
     "secretKey": "xx",
     "mobiles": [
+      "xx",
       "xx"
     ]
   },
   "enterpriseWeChat": {
-    "enable": false,
+    "enable": true,
     "webhook": "xx",
     "mentionUsers": [
       "xx"
@@ -18,7 +19,8 @@
       "xx"
     ]
   },
-  "database": {
+  "mysqlDB": {
+    "enable": false,
     "driver": "mysql",
     "username": "root",
     "password": "xx",
@@ -26,6 +28,12 @@
     "port": "13306",
     "dbname": "cvemonitor",
     "charset": "utf8mb4",
-    "show_sql": true
+    "showSql": true
+  },
+  "sqlite3DB": {
+    "enable": true,
+    "drive": "sqlite3",
+    "dbFilePath": "./config/sqlite.db",
+    "showSql": true
   }
 }
