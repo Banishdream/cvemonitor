@@ -17,11 +17,12 @@ ParseBody
 @return error "返回执行过程的错误信息"
 */
 func ParseBody(url, method string, params interface{}) error {
-	// 增加错误恢复处理
-	//defer func() {
-	//	err := recover() // 此处进行恢复
-	//	fmt.Printf("发生了错误,  类型: %T, err: %v\n", err, err)
-	//}()
+	//增加错误恢复处理
+	defer func() {
+		if err := recover(); err != nil { // 此处进行恢复
+			fmt.Printf("发生了错误,  类型: %T, err: %v\n", err, err)
+		}
+	}()
 
 	appCfg := GetAppConfig()
 

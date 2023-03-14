@@ -10,10 +10,11 @@ import (
 AppConfig 配置
 */
 type AppConfig struct {
-	GithubToken      string         `json:"githubToken"`
-	DingDing         Ding           `json:"dingDing"`
-	EnterpriseWeChat WeChat         `json:"enterpriseWeChat"`
-	Database         DatabaseConfig `json:"database"`
+	GithubToken      string        `json:"githubToken"`
+	DingDing         Ding          `json:"dingDing"`
+	EnterpriseWeChat WeChat        `json:"enterpriseWeChat"`
+	MysqlDB          MysqlConfig   `json:"mysqlDB"`
+	Sqlite3DB        Sqlite3Config `json:"sqlite3DB"`
 }
 
 type Ding struct {
@@ -30,7 +31,8 @@ type WeChat struct {
 	MentionMobiles []string `json:"mentionMobiles"`
 }
 
-type DatabaseConfig struct {
+type MysqlConfig struct {
+	Enable   bool   `json:"enable"`
 	Driver   string `json:"driver"`
 	Username string `json:"username"`
 	Password string `json:"password"`
@@ -38,7 +40,14 @@ type DatabaseConfig struct {
 	Port     string `json:"port"`
 	DbName   string `json:"dbname"`
 	Charset  string `json:"charset"`
-	ShowSql  bool   `json:"show_sql"`
+	ShowSql  bool   `json:"showSql"`
+}
+
+type Sqlite3Config struct {
+	Enable     bool   `json:"enable"`
+	Drive      string `json:"drive"`
+	DBFilePath string `json:"dbFilePath"`
+	ShowSql    bool   `json:"showSql"`
 }
 
 var appConf AppConfig

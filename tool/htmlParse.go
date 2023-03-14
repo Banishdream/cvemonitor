@@ -2,6 +2,7 @@ package tool
 
 import (
 	"cve-monitor/define"
+	"fmt"
 	"github.com/prometheus/common/log"
 	"io"
 	"net/http"
@@ -15,6 +16,13 @@ IsExistCVE
 @param url string "要获取的url地址"
 */
 func IsExistCVE(url string) bool {
+	//增加错误恢复处理
+	defer func() {
+		if err := recover(); err != nil { // 此处进行恢复
+			fmt.Printf("发生了错误,  类型: %T, err: %v\n", err, err)
+		}
+	}()
+
 	client := &http.Client{
 		Timeout: time.Duration(define.HttpTimeout) * time.Second,
 	}
@@ -23,16 +31,16 @@ func IsExistCVE(url string) bool {
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36")
 
 	if err != nil {
-		log.Fatalf("http NewRequest err->%v", err)
+		log.Error("http NewRequest err->%v", err)
 	}
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Fatalf("do client err->%v", err)
+		log.Error("do client err->%v", err)
 	}
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalf("read resp err->%v", err)
+		log.Error("read resp err->%v", err)
 	}
 
 	defer resp.Body.Close()
