@@ -8,7 +8,6 @@ import (
 	"github.com/go-xorm/xorm"
 	_ "github.com/mattn/go-sqlite3"
 	"os"
-	"time"
 )
 
 type Orm struct {
@@ -76,7 +75,7 @@ func OrmEngine(cfg *AppConfig) error {
 	if err != nil {
 		return err
 	}
-	engine.SetConnMaxLifetime(define.MysqlWaitTimeout * time.Second)
+	engine.SetConnMaxLifetime(define.MysqlWaitTimeout)
 	DbEngine.Engine = engine
 
 	return nil

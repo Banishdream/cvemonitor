@@ -27,7 +27,7 @@ func UserRepoMonitor(users []string) {
 		// TODO 2 解析返回的数据
 		fmt.Printf("开始对 %s 进行抓取数据。。\n", url)
 		var userRepoParam params.UserRepoParams
-		if err := tool.ParseBody(url, method, &userRepoParam); err != nil {
+		if err := tool.HttpRequest(url, method, &userRepoParam); err != nil {
 			fmt.Println("解析body失败,", err)
 			time.Sleep(define.RequestSleepTime)
 			continue
@@ -40,14 +40,15 @@ func UserRepoMonitor(users []string) {
 			if (userRepo.CreatedAt[:10] == today && userRepo.Fork == false) || define.WriteAll {
 				um := models.UserMonitor{
 					RepoName: userRepo.FullName,
+					Describe: userRepo.Description,
 				}
 				// 写入数据库
 				n := dao.CVEDao.InsertData(um)
 				if n == 0 {
-					fmt.Printf("插入 %s 数据失败: \n", userRepo.FullName)
+					//fmt.Printf("未更新 %s 数据\n", userRepo.FullName)
 					continue
 				}
-				msg := fmt.Sprintf("有新的数据更新: %s\nURL:%s", userRepo.FullName, url)
+				msg := fmt.Sprintf("有新的数据更新\n仓库名:%s\nURL:%s\n描述信息%s:", userRepo.FullName, url, userRepo.Description)
 				fmt.Println(msg)
 				tool.SendMsg(msg)
 			}
@@ -71,7 +72,7 @@ func CveMonitor() {
 	// TODO 2 解析返回的数据
 	fmt.Printf("开始对 %s 进行抓取数据。。\n", url)
 	var cveRepoParam params.CveRepoParams
-	if err := tool.ParseBody(url, method, &cveRepoParam); err != nil {
+	if err := tool.HttpRequest(url, method, &cveRepoParam); err != nil {
 		log.Error(err)
 		return
 	}
@@ -106,13 +107,14 @@ func CveMonitor() {
 				CveName:  item.Name,
 				PushedAt: item.CreatedAt,
 				Url:      item.HtmlUrl,
+				Describe: item.Describe,
 			}
 			n := dao.CVEDao.InsertData(cm)
 			if n == 0 {
 				//fmt.Printf("未更新 %s 数据\n", item.Name)
 				continue
 			}
-			msg := fmt.Sprintf("有新的数据更新: %s\nURL:%s", item.Name, item.HtmlUrl)
+			msg := fmt.Sprintf("有新的数据更新\nCVE名:%s\nURL:%s\n描述信息:%s", item.Name, item.HtmlUrl, item.Describe)
 			fmt.Println(msg)
 			tool.SendMsg(msg)
 		}
@@ -135,8 +137,9 @@ func KeywordMonitor() {
 		method := define.HttpMethodGET
 
 		// TODO 2 解析返回的数据
+		fmt.Printf("开始对 %s 进行抓取数据。。\n", url)
 		var keywordParam params.KeywordParams
-		if err := tool.ParseBody(url, method, &keywordParam); err != nil {
+		if err := tool.HttpRequest(url, method, &keywordParam); err != nil {
 			log.Error(err)
 			return
 		}
@@ -162,13 +165,14 @@ func KeywordMonitor() {
 					KeywordName: item.Name,
 					PushedAt:    item.CreatedAt,
 					Url:         item.HtmlUrl,
+					Describe:    item.Describe,
 				}
 				n := dao.CVEDao.InsertData(cm)
 				if n == 0 {
 					//fmt.Printf("未更新 %s 数据\n", item.Name)
 					continue
 				}
-				msg := fmt.Sprintf("有新的数据更新: %s\nURL:%s", item.Name, item.HtmlUrl)
+				msg := fmt.Sprintf("有新的数据更新\nCVE名:%s\nURL:%s\n描述信息:%s", item.Name, item.HtmlUrl, item.Describe)
 				fmt.Println(msg)
 				tool.SendMsg(msg)
 			}
@@ -189,16 +193,18 @@ func ToolMonitor() {
 		url := toolUrl
 		method := define.HttpMethodGET
 
+		fmt.Printf("开始对 %s 进行抓取数据。。\n", url)
 		var toolParam params.ToolParams
-		if err := tool.ParseBody(url, method, &toolParam); err != nil {
+		if err := tool.HttpRequest(url, method, &toolParam); err != nil {
 			log.Error(err)
 			return
 		}
 
 		// TODO 3 获取最新的 tagName, 如果没有则赋值 "no tag"
 		tagUrl := url + "/releases"
+		fmt.Printf("开始对 %s 进行抓取数据。。\n", tagUrl)
 		var toolTagParam params.ToolTagParams
-		if err := tool.ParseBody(tagUrl, method, &toolTagParam); err != nil {
+		if err := tool.HttpRequest(tagUrl, method, &toolTagParam); err != nil {
 			log.Error(err)
 			return
 		}
@@ -214,6 +220,7 @@ func ToolMonitor() {
 			ToolName: toolParam.Name,
 			PushedAt: toolParam.PushedAt,
 			TagName:  tagName,
+			Describe: toolParam.Describe,
 		}
 
 		// TODO 5 插入数据
@@ -229,7 +236,7 @@ func ToolMonitor() {
 			//fmt.Printf("未更新 %s 数据\n", tp.TagName)
 			continue
 		} else {
-			msg := fmt.Sprintf("有新的数据更新: %s\nURL:%s", tp.TagName, toolUrl)
+			msg := fmt.Sprintf("有新的数据更新\nCVE名: %s\nURL:%s\n描述信息:%s", tp.TagName, toolUrl, tp.Describe)
 			fmt.Println(msg)
 			tool.SendMsg(msg)
 		}

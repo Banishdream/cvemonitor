@@ -19,29 +19,29 @@ func (cveD *cveDao) InsertData(data interface{}) int64 {
 	case models.CveMonitor:
 		n, err := cveD.Insert(&v)
 		if err != nil && define.Debug {
-			log.Warnln(err)
+			log.Warnf("insert mysql err: %s\n", err)
 		}
 		return n
 	case models.UserMonitor:
 		n, err := cveD.Insert(&v)
 		if err != nil && define.Debug {
-			log.Warnln(err)
+			log.Warnf("insert mysql err: %s\n", err)
 		}
 		return n
 	case models.KeywordMonitor:
 		n, err := cveD.Insert(&v)
 		if err != nil && define.Debug {
-			log.Warnln(err)
+			log.Warnf("insert mysql err: %s\n", err)
 		}
 		return n
 	case models.RedTeamToolsMonitor:
 		n, err := cveD.Insert(&v)
 		if err != nil && define.Debug {
-			log.Warnln(err)
+			log.Warnf("insert mysql err: %s\n", err)
 		}
 		return n
 	default:
-		fmt.Println("undefined type！")
+		fmt.Println("InsertData err, undefined type！")
 	}
 	return 0
 }
@@ -49,7 +49,7 @@ func (cveD *cveDao) InsertData(data interface{}) int64 {
 func (cveD *cveDao) UpdateData(data models.RedTeamToolsMonitor, id int64) int64 {
 	n, err := cveD.ID(id).Update(&data)
 	if err != nil && define.Debug {
-		log.Warnf("update mysql err: %s", err)
+		log.Warnf("update mysql err: %s\n", err)
 		return 0
 	}
 	return n
@@ -59,7 +59,7 @@ func (cveD *cveDao) SelectData(toolName string) (int64, string) {
 	var tp models.RedTeamToolsMonitor
 	if _, err := cveD.Where("tool_name = ?", toolName).Get(&tp); err != nil {
 		if define.Debug {
-			log.Warnln(err.Error())
+			log.Warnf("select mysql err: %s\n", err)
 		}
 		return 0, ""
 	}
