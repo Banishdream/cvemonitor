@@ -8,5 +8,6 @@ type KeywordParams struct {
 type ItemConf struct {
 	Name      string `json:"name"`
 	HtmlUrl   string `json:"html_url"`
+	Describe  string `json:"description"`
 	CreatedAt string `json:"created_at"`
 }

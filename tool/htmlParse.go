@@ -7,7 +7,6 @@ import (
 	"io"
 	"net/http"
 	"regexp"
-	"time"
 )
 
 /*
@@ -24,7 +23,7 @@ func IsExistCVE(url string) bool {
 	}()
 
 	client := &http.Client{
-		Timeout: time.Duration(define.HttpTimeout) * time.Second,
+		Timeout: define.HttpTimeout,
 	}
 	req, err := http.NewRequest("GET", url, nil)
 	req.Header.Set("Content-Type", "application/json")
